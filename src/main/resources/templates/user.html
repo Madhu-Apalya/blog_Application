@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Management</title>
+
+    <div th:replace="/fragments/header :: header-css"/>
+
+</head>
+<body>
+
+<div th:replace="/fragments/header :: header"/>
+
+<div class="container">
+
+    <div class="container">
+
+        <!--Show this info message only if posted successfully-->
+        <div class="alert alert-info" th:if="${successMessage}" th:utext="${successMessage}"></div>
+
+		<div class="row" style="margin-top:20px">
+			<table border="1" style="width:300px">
+			    <tr>
+			        <td>User Name</td>
+			        <td>Action</td>
+			    </tr>
+			    <th:block th:each="user : ${user}">
+				    <tr>
+				        <td th:text="${user.username}">User'</td>
+				        <td><form action="#" th:action="@{'/user/{id}'(id=${user.id})}" th:method="delete" style="
+				        margin-left: 30px;margin-top: 10px;" class="">
+		                    <div class="form-group">
+		                        <input type="hidden" name="_method" value="delete"/>
+		                        <button type="submit" class="btn btn-danger" th:text="Delete">Delete</button>
+		                    </div>
+		                </form></td>
+				    </tr>
+				</th:block>
+			</table>
+		</div>
+
+    </div>
+
+</div>
+<!-- /.container -->
+
+<div th:replace="/fragments/footer :: footer"/>
+
+</body>
+</html>
